@@ -1,0 +1,205 @@
+{
+  "brand": {
+    "tagline": "cliente de API"
+  },
+  "sidebar": {
+    "history": "Histórico",
+    "historyEmpty": "Nenhuma requisição ainda.",
+    "clearHistory": "Limpar histórico"
+  },
+  "side": {
+    "collections": "Biblioteca",
+    "environments": "Ambientes",
+    "history": "Histórico",
+    "new": "Novo",
+    "recent": "recente",
+    "clearRecent": "Limpar recentes",
+    "newCollection": "Nova",
+    "newCollectionName": "Nova coleção",
+    "newFolderName": "Nova pasta",
+    "newRequestName": "Nova requisição",
+    "noCollections": "Nenhuma coleção ainda. Crie uma e salve requisições nela.",
+    "emptyFolder": "Vazio",
+    "addRequest": "Nova requisição aqui",
+    "addFolder": "Nova pasta",
+    "newEnv": "Novo",
+    "newEnvName": "Novo ambiente",
+    "noEnvs": "Nenhum ambiente ainda.",
+    "noEnv": "Sem ambiente",
+    "setActive": "Tornar ativo",
+    "active": "ativo",
+    "envName": "Nome do ambiente",
+    "varKey": "variável",
+    "varValue": "valor",
+    "saveEnv": "Salvar ambiente",
+    "editVars": "Variáveis",
+    "export": "Exportar",
+    "collectionVars": "Variáveis da coleção",
+    "saveVars": "Salvar variáveis",
+    "envHint": "Use uma variável entre chaves duplas (ex.: base_url) na URL, headers ou corpo de qualquer requisição enquanto este ambiente estiver ativo.",
+    "varPopTarget": "Editando no ambiente: {{env}}",
+    "varPopNew": "Nova variável no ambiente: {{env}}"
+  },
+  "actions": {
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "beautify": "Formatar",
+    "remove": "Remover",
+    "clear": "Limpar",
+    "save": "Salvar",
+    "saveAs": "Salvar…",
+    "cancel": "Cancelar"
+  },
+  "save": {
+    "title": "Salvar requisição em uma pasta",
+    "empty": "Crie uma pasta primeiro — use + Novo → Nova pasta."
+  },
+  "toggles": {
+    "theme": "Alternar tema",
+    "language": "Idioma"
+  },
+  "url": {
+    "placeholder": "https://api.exemplo.com/v1/recurso"
+  },
+  "reqTabs": {
+    "params": "Params",
+    "headers": "Headers",
+    "body": "Body",
+    "scripts": "Scripts"
+  },
+  "scripts": {
+    "pre": "Pré-envio",
+    "post": "Pós-envio",
+    "insert": "Inserir trecho",
+    "hint": "Roda num sandbox isolado. Use a API pc.*: pc.env.get/set, pc.request, pc.response, pc.test(nome, fn), pc.expect(x).to.equal(y), pc.console.log.",
+    "prePlaceholder": "// roda antes de enviar a requisição\n// pc.env.set(\"token\", \"...\")\n// pc.request.headers.set(\"Authorization\", \"Bearer \" + pc.env.get(\"token\"))",
+    "postPlaceholder": "// roda quando a resposta chega\npc.test(\"status é 200\", () => {\n  pc.expect(pc.response.code).to.equal(200);\n});"
+  },
+  "params": {
+    "query": "Query Params",
+    "path": "Path Variables",
+    "pathLocked": "Variável de caminho (vem da URL)"
+  },
+  "kv": {
+    "param": "param",
+    "header": "Header",
+    "value": "valor"
+  },
+  "headers": {
+    "showAuto": "Mostrar headers auto-gerados",
+    "hideAuto": "Ocultar headers auto-gerados",
+    "computed": "<calculado no envio>"
+  },
+  "body": {
+    "none": "Nenhum",
+    "formData": "form-data",
+    "urlencoded": "x-www-form-urlencoded",
+    "raw": "raw",
+    "binary": "binary",
+    "noBody": "Esta requisição não tem corpo.",
+    "selectFile": "Selecionar arquivo",
+    "fdText": "Texto",
+    "fdFile": "Arquivo",
+    "jsonPlaceholder": "{\n  \"chave\": \"valor\"\n}",
+    "textPlaceholder": "corpo da requisição"
+  },
+  "rawLang": {
+    "text": "Texto",
+    "json": "JSON",
+    "javascript": "JavaScript",
+    "html": "HTML",
+    "xml": "XML"
+  },
+  "response": {
+    "title": "Resposta",
+    "pretty": "Pretty",
+    "body": "Body",
+    "raw": "Raw",
+    "headers": "Headers",
+    "tests": "Testes",
+    "testsPassed": "passou",
+    "testsFailed": "falhou",
+    "logs": "Console",
+    "hint": "Digite uma URL e clique <b>Enviar</b> — ou <k>Ctrl</k>+<k>Enter</k>."
+  },
+  "tab": {
+    "unsaved": "Alterações não salvas"
+  },
+  "menu": {
+    "file": "Arquivo",
+    "edit": "Editar",
+    "view": "Ver",
+    "help": "Ajuda",
+    "newRequest": "Nova requisição",
+    "import": "Importar…",
+    "export": "Exportar…",
+    "exit": "Sair",
+    "settings": "Configurações",
+    "toggleTheme": "Alternar tema",
+    "appearance": "Aparência",
+    "about": "Sobre o PostCat",
+    "undo": "Desfazer",
+    "redo": "Refazer",
+    "cut": "Recortar",
+    "copy": "Copiar",
+    "paste": "Colar",
+    "selectAll": "Selecionar tudo",
+    "zoomIn": "Aumentar zoom",
+    "zoomOut": "Diminuir zoom",
+    "zoomReset": "Resetar zoom",
+    "toggleSidebar": "Alternar barra lateral",
+    "twoPane": "Duas colunas"
+  },
+  "settings": {
+    "title": "Configurações",
+    "soonBadge": "Em breve",
+    "tabs": {
+      "general": "Geral",
+      "appearance": "Aparência",
+      "network": "Rede",
+      "shortcuts": "Atalhos",
+      "data": "Dados",
+      "about": "Sobre"
+    },
+    "appearance": {
+      "theme": "Tema",
+      "auto": "Automático",
+      "autoDesc": "Segue o sistema",
+      "userTheme": "personalizado",
+      "openFolder": "Abrir pasta de temas",
+      "newTheme": "Novo tema (a partir do atual)",
+      "themeHint": "Temas são arquivos JSON. Coloque os seus na pasta de temas e eles aparecem aqui na hora.",
+      "language": "Idioma",
+      "fonts": "Fontes",
+      "fontSystem": "Sistema (interface)",
+      "fontEditor": "Editor / Resposta",
+      "fontSize": "Tamanho (px)",
+      "fontReset": "Restaurar padrão",
+      "fontHint": "Qualquer stack CSS de font-family serve, ex.: \"JetBrains Mono\", monospace.",
+      "indent": "Indentação",
+      "indentSpace": "Espaços",
+      "indentTab": "Tab"
+    },
+    "general": {
+      "soon": "Preferências gerais — inicialização, diretório de trabalho e padrões — ficarão aqui.",
+      "interface": "Interface",
+      "twoPane": "Duas colunas",
+      "twoPaneDesc": "Mostra a resposta ao lado da requisição em vez de embaixo."
+    },
+    "network": { "soon": "Timeout, verificação SSL, tamanho máximo de resposta, redirecionamentos e proxy ficarão aqui." },
+    "shortcuts": { "soon": "Veja e personalize os atalhos de teclado aqui." },
+    "data": { "soon": "Importar e exportar — coleções e OpenAPI/Swagger — ficarão aqui." },
+    "about": {
+      "version": "Versão {{version}}",
+      "desc": "Um cliente de API rápido, bonito e open source feito em Rust."
+    }
+  },
+  "errors": {
+    "timeout": "A requisição expirou (timeout).",
+    "connect": "Não foi possível conectar ao servidor.",
+    "request": "Requisição inválida: {{detail}}",
+    "url": "URL inválida: {{detail}}",
+    "method": "Método HTTP inválido: {{detail}}",
+    "unknown": "{{detail}}"
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "brand": {
+    "tagline": "API client"
+  },
+  "sidebar": {
+    "history": "History",
+    "historyEmpty": "No requests yet.",
+    "clearHistory": "Clear history"
+  },
+  "side": {
+    "collections": "Library",
+    "environments": "Environments",
+    "history": "History",
+    "new": "New",
+    "recent": "recent",
+    "clearRecent": "Clear recent",
+    "newCollection": "New",
+    "newCollectionName": "New collection",
+    "newFolderName": "New folder",
+    "newRequestName": "New request",
+    "noCollections": "No collections yet. Create one and save requests into it.",
+    "emptyFolder": "Empty",
+    "addRequest": "New request here",
+    "addFolder": "New folder",
+    "newEnv": "New",
+    "newEnvName": "New environment",
+    "noEnvs": "No environments yet.",
+    "noEnv": "No environment",
+    "setActive": "Set active",
+    "active": "active",
+    "envName": "Environment name",
+    "varKey": "variable",
+    "varValue": "value",
+    "saveEnv": "Save environment",
+    "editVars": "Variables",
+    "export": "Export",
+    "collectionVars": "Collection variables",
+    "saveVars": "Save variables",
+    "envHint": "Reference a variable with double curly braces (e.g. base_url) in any request URL, header or body while this environment is active.",
+    "varPopTarget": "Editing in environment: {{env}}",
+    "varPopNew": "New variable in environment: {{env}}"
+  },
+  "actions": {
+    "send": "Send",
+    "sending": "Sending…",
+    "beautify": "Beautify",
+    "remove": "Remove",
+    "clear": "Clear",
+    "save": "Save",
+    "saveAs": "Save…",
+    "cancel": "Cancel"
+  },
+  "save": {
+    "title": "Save request to a folder",
+    "empty": "Create a folder first — use + New → Folder."
+  },
+  "toggles": {
+    "theme": "Toggle theme",
+    "language": "Language"
+  },
+  "url": {
+    "placeholder": "https://api.example.com/v1/resource"
+  },
+  "reqTabs": {
+    "params": "Params",
+    "headers": "Headers",
+    "body": "Body",
+    "scripts": "Scripts"
+  },
+  "scripts": {
+    "pre": "Pre-send",
+    "post": "Post-send",
+    "insert": "Insert snippet",
+    "hint": "Runs in an isolated sandbox. Use the pc.* API: pc.env.get/set, pc.request, pc.response, pc.test(name, fn), pc.expect(x).to.equal(y), pc.console.log.",
+    "prePlaceholder": "// runs before the request is sent\n// pc.env.set(\"token\", \"...\")\n// pc.request.headers.set(\"Authorization\", \"Bearer \" + pc.env.get(\"token\"))",
+    "postPlaceholder": "// runs after the response arrives\npc.test(\"status is 200\", () => {\n  pc.expect(pc.response.code).to.equal(200);\n});"
+  },
+  "params": {
+    "query": "Query Params",
+    "path": "Path Variables",
+    "pathLocked": "Path variable (from the URL)"
+  },
+  "kv": {
+    "param": "param",
+    "header": "Header",
+    "value": "value"
+  },
+  "headers": {
+    "showAuto": "Show auto-generated headers",
+    "hideAuto": "Hide auto-generated headers",
+    "computed": "<computed when sent>"
+  },
+  "body": {
+    "none": "None",
+    "formData": "form-data",
+    "urlencoded": "x-www-form-urlencoded",
+    "raw": "raw",
+    "binary": "binary",
+    "noBody": "This request has no body.",
+    "selectFile": "Select file",
+    "fdText": "Text",
+    "fdFile": "File",
+    "jsonPlaceholder": "{\n  \"key\": \"value\"\n}",
+    "textPlaceholder": "request body"
+  },
+  "rawLang": {
+    "text": "Text",
+    "json": "JSON",
+    "javascript": "JavaScript",
+    "html": "HTML",
+    "xml": "XML"
+  },
+  "response": {
+    "title": "Response",
+    "pretty": "Pretty",
+    "body": "Body",
+    "raw": "Raw",
+    "headers": "Headers",
+    "tests": "Tests",
+    "testsPassed": "passed",
+    "testsFailed": "failed",
+    "logs": "Console",
+    "hint": "Type a URL and hit <b>Send</b> — or <k>Ctrl</k>+<k>Enter</k>."
+  },
+  "tab": {
+    "unsaved": "Unsaved changes"
+  },
+  "menu": {
+    "file": "File",
+    "edit": "Edit",
+    "view": "View",
+    "help": "Help",
+    "newRequest": "New request",
+    "import": "Import…",
+    "export": "Export…",
+    "exit": "Exit",
+    "settings": "Settings",
+    "toggleTheme": "Toggle theme",
+    "appearance": "Appearance",
+    "about": "About PostCat",
+    "undo": "Undo",
+    "redo": "Redo",
+    "cut": "Cut",
+    "copy": "Copy",
+    "paste": "Paste",
+    "selectAll": "Select all",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "zoomReset": "Reset zoom",
+    "toggleSidebar": "Toggle sidebar",
+    "twoPane": "Two-pane view"
+  },
+  "settings": {
+    "title": "Settings",
+    "soonBadge": "Coming soon",
+    "tabs": {
+      "general": "General",
+      "appearance": "Appearance",
+      "network": "Network",
+      "shortcuts": "Shortcuts",
+      "data": "Data",
+      "about": "About"
+    },
+    "appearance": {
+      "theme": "Theme",
+      "auto": "Auto",
+      "autoDesc": "Follow the OS",
+      "userTheme": "custom",
+      "openFolder": "Open themes folder",
+      "newTheme": "New theme from current",
+      "themeHint": "Themes are JSON files. Drop your own into the themes folder and they appear here instantly.",
+      "language": "Language",
+      "fonts": "Fonts",
+      "fontSystem": "System (UI)",
+      "fontEditor": "Editor / Response",
+      "fontSize": "Size (px)",
+      "fontReset": "Reset to default",
+      "fontHint": "Any CSS font-family stack works, e.g. \"JetBrains Mono\", monospace.",
+      "indent": "Indentation",
+      "indentSpace": "Spaces",
+      "indentTab": "Tab"
+    },
+    "general": {
+      "soon": "General preferences — startup, working directory, and defaults — will live here.",
+      "interface": "Interface",
+      "twoPane": "Two-pane view",
+      "twoPaneDesc": "Show the response beside the request instead of below it."
+    },
+    "network": { "soon": "Request timeout, SSL verification, max response size, redirects and proxy will live here." },
+    "shortcuts": { "soon": "View and customize keyboard shortcuts here." },
+    "data": { "soon": "Import and export — collections and OpenAPI/Swagger — will live here." },
+    "about": {
+      "version": "Version {{version}}",
+      "desc": "A fast, beautiful, open-source API client built in Rust."
+    }
+  },
+  "errors": {
+    "timeout": "The request timed out.",
+    "connect": "Couldn't connect to the server.",
+    "request": "Invalid request: {{detail}}",
+    "url": "Invalid URL: {{detail}}",
+    "method": "Invalid HTTP method: {{detail}}",
+    "unknown": "{{detail}}"
+  }
+}
