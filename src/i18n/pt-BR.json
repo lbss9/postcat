@@ -115,6 +115,34 @@
     "foldAll": "Recolher tudo",
     "unfoldAll": "Expandir tudo"
   },
+  "ctx": {
+    "open": "Abrir",
+    "rename": "Renomear",
+    "duplicate": "Duplicar",
+    "duplicateName": "{{name}} cópia",
+    "delete": "Excluir",
+    "export": "Exportar…",
+    "newRequestHere": "Nova requisição aqui",
+    "newFolderHere": "Nova pasta aqui",
+    "newRequest": "Nova requisição",
+    "newFolder": "Nova pasta",
+    "import": "Importar…",
+    "settings": "Configurações",
+    "newTab": "Nova aba",
+    "duplicateTab": "Duplicar aba",
+    "close": "Fechar",
+    "closeOthers": "Fechar as outras",
+    "closeAll": "Fechar todas",
+    "setActive": "Tornar ativo",
+    "deactivate": "Desativar",
+    "newEnv": "Novo ambiente",
+    "openRequest": "Abrir requisição",
+    "clearHistory": "Limpar histórico",
+    "cut": "Recortar",
+    "copy": "Copiar",
+    "paste": "Colar",
+    "selectAll": "Selecionar tudo"
+  },
   "response": {
     "title": "Resposta",
     "pretty": "Pretty",
@@ -129,7 +157,8 @@
   },
   "tab": {
     "unsaved": "Alterações não salvas",
-    "confirmClose": "Esta aba tem alterações não salvas. Fechar mesmo assim?"
+    "confirmClose": "Esta aba tem alterações não salvas. Fechar mesmo assim?",
+    "confirmCloseMany": "Há abas com alterações não salvas. Fechar mesmo assim?"
   },
   "menu": {
     "file": "Arquivo",

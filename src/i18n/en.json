@@ -115,6 +115,34 @@
     "foldAll": "Collapse all",
     "unfoldAll": "Expand all"
   },
+  "ctx": {
+    "open": "Open",
+    "rename": "Rename",
+    "duplicate": "Duplicate",
+    "duplicateName": "{{name}} copy",
+    "delete": "Delete",
+    "export": "Export…",
+    "newRequestHere": "New request here",
+    "newFolderHere": "New folder here",
+    "newRequest": "New request",
+    "newFolder": "New folder",
+    "import": "Import…",
+    "settings": "Settings",
+    "newTab": "New tab",
+    "duplicateTab": "Duplicate tab",
+    "close": "Close",
+    "closeOthers": "Close others",
+    "closeAll": "Close all",
+    "setActive": "Set active",
+    "deactivate": "Deactivate",
+    "newEnv": "New environment",
+    "openRequest": "Open request",
+    "clearHistory": "Clear history",
+    "cut": "Cut",
+    "copy": "Copy",
+    "paste": "Paste",
+    "selectAll": "Select all"
+  },
   "response": {
     "title": "Response",
     "pretty": "Pretty",
@@ -129,7 +157,8 @@
   },
   "tab": {
     "unsaved": "Unsaved changes",
-    "confirmClose": "This tab has unsaved changes. Close it anyway?"
+    "confirmClose": "This tab has unsaved changes. Close it anyway?",
+    "confirmCloseMany": "Some tabs have unsaved changes. Close them anyway?"
   },
   "menu": {
     "file": "File",

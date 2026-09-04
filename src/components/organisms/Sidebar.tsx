@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Icon, { type IconName } from "@/components/atoms/Icon";
 import Button from "@/components/atoms/Button";
+import { useContextMenu, type ContextMenuItem } from "@/components/molecules/ContextMenu";
 import type {
   Environment,
   HistoryEntry,
@@ -24,9 +25,11 @@ export interface SidebarProps {
   onAddRequest: (parentId: string) => void;
   onRenameNode: (id: string, name: string) => void;
   onDeleteNode: (id: string) => void;
+  onDuplicateNode: (node: TreeNode) => void;
   onOpenRequest: (node: TreeNode) => void;
   onMoveNode: (id: string, parentId: string | null, index: number) => void;
   onExportNode: (node: TreeNode) => void;
+  onImport: () => void;
   // environments
   environments: Environment[];
   onCreateEnv: () => void;
@@ -119,7 +122,16 @@ function NewMenu({
 function CollectionsPanel(props: SidebarProps) {
   const { nodes, onCreateNode } = props;
   const { t } = useTranslation();
+  const { open } = useContextMenu();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
+  // right-click on empty space in the tree
+  const emptyMenu: ContextMenuItem[] = [
+    { label: t("ctx.newRequest"), icon: "file-plus", onSelect: props.onNewRequest },
+    { label: t("ctx.newFolder"), icon: "folder-plus", onSelect: () => onCreateNode("folder") },
+    { separator: true },
+    { label: t("ctx.import"), icon: "upload", onSelect: props.onImport },
+  ];
 
   const childrenOf = useMemo(() => {
     const map = new Map<string | null, TreeNode[]>();
@@ -160,6 +172,7 @@ function CollectionsPanel(props: SidebarProps) {
       </div>
       <div
         className="tree"
+        onContextMenu={(e) => open(e, emptyMenu)}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
@@ -218,6 +231,7 @@ function TreeRow({
   props: SidebarProps;
 }) {
   const { t } = useTranslation();
+  const { open } = useContextMenu();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(node.name);
   const [dropHint, setDropHint] = useState(false);
@@ -231,6 +245,43 @@ function TreeRow({
     const name = draft.trim();
     if (name && name !== node.name) props.onRenameNode(node.id, name);
     else setDraft(node.name);
+  }
+
+  function startRename() {
+    setDraft(node.name);
+    setEditing(true);
+  }
+
+  function nodeMenu(): ContextMenuItem[] {
+    if (isContainer) {
+      const items: ContextMenuItem[] = [
+        {
+          label: t("ctx.newRequestHere"),
+          icon: "file-plus",
+          onSelect: () => {
+            props.onAddRequest(node.id);
+          },
+        },
+        { label: t("ctx.newFolderHere"), icon: "folder-plus", onSelect: () => props.onAddFolder(node.id) },
+        { separator: true },
+        { label: t("ctx.rename"), icon: "pencil", onSelect: startRename },
+      ];
+      if (isCollection) {
+        items.push({ label: t("ctx.export"), icon: "download", onSelect: () => props.onExportNode(node) });
+      }
+      items.push(
+        { separator: true },
+        { label: t("ctx.delete"), icon: "trash", danger: true, onSelect: () => props.onDeleteNode(node.id) },
+      );
+      return items;
+    }
+    return [
+      { label: t("ctx.open"), icon: "open-tab", onSelect: () => props.onOpenRequest(node) },
+      { label: t("ctx.rename"), icon: "pencil", onSelect: startRename },
+      { label: t("ctx.duplicate"), icon: "duplicate", onSelect: () => props.onDuplicateNode(node) },
+      { separator: true },
+      { label: t("ctx.delete"), icon: "trash", danger: true, onSelect: () => props.onDeleteNode(node.id) },
+    ];
   }
 
   function handleDrop(e: React.DragEvent) {
@@ -268,10 +319,10 @@ function TreeRow({
         onDragLeave={() => setDropHint(false)}
         onDrop={handleDrop}
         onClick={() => (isContainer ? onToggle(node.id) : props.onOpenRequest(node))}
+        onContextMenu={(e) => open(e, nodeMenu())}
         onDoubleClick={(e) => {
           e.stopPropagation();
-          setDraft(node.name);
-          setEditing(true);
+          startRename();
         }}
       >
         {isContainer ? (
@@ -378,6 +429,20 @@ function EnvironmentsPanel({
   onSetActiveEnv,
 }: SidebarProps) {
   const { t } = useTranslation();
+  const { open } = useContextMenu();
+
+  function envMenu(env: Environment): ContextMenuItem[] {
+    return [
+      { label: t("ctx.open"), icon: "open-tab", onSelect: () => onOpenEnv(env.id) },
+      {
+        label: env.isActive ? t("ctx.deactivate") : t("ctx.setActive"),
+        icon: "power",
+        onSelect: () => onSetActiveEnv(env.isActive ? "" : env.id),
+      },
+      { separator: true },
+      { label: t("ctx.delete"), icon: "trash", danger: true, onSelect: () => onDeleteEnv(env.id) },
+    ];
+  }
 
   return (
     <div className="side-panel">
@@ -387,10 +452,19 @@ function EnvironmentsPanel({
           {t("side.newEnv")}
         </Button>
       </div>
-      <div className="env-list">
+      <div
+        className="env-list"
+        onContextMenu={(e) =>
+          open(e, [{ label: t("ctx.newEnv"), icon: "plus", onSelect: onCreateEnv }])
+        }
+      >
         {environments.length === 0 && <p className="side-empty">{t("side.noEnvs")}</p>}
         {environments.map((env) => (
-          <div key={env.id} className={`env-row-simple ${env.isActive ? "active" : ""}`}>
+          <div
+            key={env.id}
+            className={`env-row-simple ${env.isActive ? "active" : ""}`}
+            onContextMenu={(e) => open(e, envMenu(env))}
+          >
             <Button
               variant="bare"
               className={`env-radio ${env.isActive ? "on" : ""}`}
@@ -420,6 +494,16 @@ function EnvironmentsPanel({
 
 function HistoryPanel({ history, onOpenHistory, onClearHistory }: SidebarProps) {
   const { t } = useTranslation();
+  const { open } = useContextMenu();
+
+  function histMenu(h: HistoryEntry): ContextMenuItem[] {
+    return [
+      { label: t("ctx.openRequest"), icon: "open-tab", onSelect: () => onOpenHistory(h) },
+      { separator: true },
+      { label: t("ctx.clearHistory"), icon: "trash", danger: true, onSelect: onClearHistory },
+    ];
+  }
+
   return (
     <div className="side-panel">
       <div className="side-panel-head">
@@ -445,6 +529,7 @@ function HistoryPanel({ history, onOpenHistory, onClearHistory }: SidebarProps) 
             key={h.id}
             className="hist-row"
             onClick={() => onOpenHistory(h)}
+            onContextMenu={(e) => open(e, histMenu(h))}
             title={h.url}
           >
             <span className={`method-tag m-${h.method.toLowerCase()}`}>{h.method}</span>

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import Resizer from "@/components/atoms/Resizer";
 
 /**
@@ -13,6 +13,7 @@ export default function WorkspaceLayout({
   sidebarWidth,
   onSidebarResizeStart,
   onSidebarResize,
+  onMainContextMenu,
   overlays,
   children,
 }: {
@@ -22,6 +23,7 @@ export default function WorkspaceLayout({
   sidebarWidth: number;
   onSidebarResizeStart: () => void;
   onSidebarResize: (delta: number) => void;
+  onMainContextMenu?: (e: MouseEvent) => void;
   overlays?: ReactNode;
   children: ReactNode;
 }) {
@@ -43,7 +45,9 @@ export default function WorkspaceLayout({
           />
         )}
 
-        <main className="main">{children}</main>
+        <main className="main" onContextMenu={onMainContextMenu}>
+          {children}
+        </main>
       </div>
 
       {overlays}

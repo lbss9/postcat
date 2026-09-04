@@ -117,6 +117,20 @@ export function useWorkspaceTabs() {
     setTabs((ts) => [...ts, tab]);
     setActiveTabId(tab.id);
   }
+  /** Clone a request tab into an independent unsaved copy, opened next to it. */
+  function duplicateTab(id: string) {
+    const src = tabs.find((tb) => tb.id === id);
+    if (!src || src.kind !== "request") return;
+    const copy = newRequestTab(normalizeRequest(structuredClone(src.req)), null);
+    copy.dirty = true;
+    setTabs((ts) => {
+      const idx = ts.findIndex((tb) => tb.id === id);
+      const next = [...ts];
+      next.splice(idx + 1, 0, copy);
+      return next;
+    });
+    setActiveTabId(copy.id);
+  }
   function closeTab(id: string) {
     const idx = tabs.findIndex((tb) => tb.id === id);
     let next = tabs.filter((tb) => tb.id !== id);
@@ -142,6 +156,7 @@ export function useWorkspaceTabs() {
     newTab,
     openRequestTab,
     openEnvTab,
+    duplicateTab,
     closeTab,
   };
 }

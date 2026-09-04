@@ -22,6 +22,17 @@ import SaveDialog from "@/components/organisms/SaveDialog";
 import SettingsDialog, { type SettingsTab } from "@/components/organisms/SettingsDialog";
 import { usePersistedBool } from "@/hooks/usePersistedBool";
 import { confirmDialog } from "@/utils/dialog";
+import { useContextMenu, type ContextMenuItem } from "@/components/molecules/ContextMenu";
+import {
+  closestEditable,
+  copyFrom,
+  cutFrom,
+  fieldHasSelection,
+  isTextInput,
+  pasteInto,
+  selectAll,
+  selectedText,
+} from "@/utils/textEdit";
 
 import { useLayout } from "@/hooks/useLayout";
 import { useTheme } from "@/hooks/useTheme";
@@ -73,6 +84,7 @@ import {
   type SendResult,
   type TreeNode,
 } from "@/types";
+import { newRequestTab } from "@/types/workspace";
 import { reqLabel } from "@/utils/request";
 import "@/styles/app.css";
 
@@ -85,6 +97,7 @@ export default function App() {
   const [confirmClose, toggleConfirmClose] = usePersistedBool("postcat-confirm-close", true);
   const [saveHistory, toggleSaveHistory] = usePersistedBool("postcat-save-history", true);
   const { activeTab, activeReq, updateReqTab, patchReq } = ws;
+  const ctxMenu = useContextMenu();
 
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -473,6 +486,64 @@ export default function App() {
     ws.closeTab(id);
   }
 
+  // bulk close (context menu: close others / close all), one confirm if needed
+  async function closeManyTabs(ids: Set<string>) {
+    const targets = ws.tabs.filter((tb) => ids.has(tb.id));
+    const anyDirty = targets.some((tb) => tb.kind === "request" && (!tb.nodeId || tb.dirty));
+    if (confirmClose && anyDirty && !(await confirmDialog(t("tab.confirmCloseMany")))) return;
+    const next = ws.tabs.filter((tb) => !ids.has(tb.id));
+    if (next.length === 0) {
+      const nt = newRequestTab();
+      ws.setTabs([nt]);
+      ws.setActiveTabId(nt.id);
+      return;
+    }
+    ws.setTabs(next);
+    if (!next.some((tb) => tb.id === ws.activeTabId)) {
+      ws.setActiveTabId(next[next.length - 1].id);
+    }
+  }
+  const closeOtherTabs = (id: string) =>
+    closeManyTabs(new Set(ws.tabs.filter((tb) => tb.id !== id).map((tb) => tb.id)));
+  const closeAllTabs = () => closeManyTabs(new Set(ws.tabs.map((tb) => tb.id)));
+
+  async function duplicateNode(node: TreeNode) {
+    if (node.kind !== "request") return;
+    await nodeCreate(
+      node.parentId,
+      "request",
+      t("ctx.duplicateName", { name: node.name }),
+      node.request ?? newRequest(),
+    ).catch(() => {});
+    reloadNodes();
+  }
+
+  // custom menu for the main work area: text editing over a field/editor,
+  // otherwise the app default (new request / import / settings)
+  function mainContextMenu(e: React.MouseEvent) {
+    const editable = closestEditable(e.target as Element);
+    if (editable) {
+      const input = isTextInput(editable);
+      const hasSel = fieldHasSelection(editable);
+      const snapshot = selectedText();
+      const items: ContextMenuItem[] = [
+        { label: t("ctx.cut"), icon: "cut", disabled: !input || !hasSel, onSelect: () => cutFrom(editable) },
+        { label: t("ctx.copy"), icon: "copy", disabled: !hasSel, onSelect: () => copyFrom(editable, snapshot) },
+        { label: t("ctx.paste"), icon: "paste", disabled: !input, onSelect: () => pasteInto(editable) },
+        { separator: true },
+        { label: t("ctx.selectAll"), onSelect: () => selectAll(editable) },
+      ];
+      ctxMenu.open(e, items);
+      return;
+    }
+    ctxMenu.open(e, [
+      { label: t("ctx.newRequest"), icon: "file-plus", onSelect: ws.newTab },
+      { label: t("ctx.import"), icon: "upload", onSelect: importFromFile },
+      { separator: true },
+      { label: t("ctx.settings"), icon: "settings", shortcut: "Ctrl+,", onSelect: () => openSettings("general") },
+    ]);
+  }
+
   // global shortcuts
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -536,9 +607,11 @@ export default function App() {
           onAddRequest={addRequestTo}
           onRenameNode={renameNode}
           onDeleteNode={deleteNode}
+          onDuplicateNode={duplicateNode}
           onOpenRequest={(node) => node.request && ws.openRequestTab(node.request, node.id)}
           onMoveNode={moveNode}
           onExportNode={exportCollection}
+          onImport={importFromFile}
           environments={environments}
           onCreateEnv={createEnv}
           onOpenEnv={ws.openEnvTab}
@@ -553,6 +626,7 @@ export default function App() {
       sidebarWidth={layout.sidebarWidth}
       onSidebarResizeStart={layout.startSidebarResize}
       onSidebarResize={layout.resizeSidebar}
+      onMainContextMenu={mainContextMenu}
       overlays={
         <>
           <SettingsDialog
@@ -596,6 +670,9 @@ export default function App() {
         onSelect={ws.setActiveTabId}
         onClose={closeTab}
         onNew={ws.newTab}
+        onDuplicate={ws.duplicateTab}
+        onCloseOthers={closeOtherTabs}
+        onCloseAll={closeAllTabs}
       />
 
       {activeReq ? (

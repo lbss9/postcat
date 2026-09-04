@@ -3,6 +3,11 @@ import {
   ChevronRight,
   ChevronsDownUp,
   ChevronsUpDown,
+  ClipboardPaste,
+  CopyPlus,
+  ExternalLink,
+  Power,
+  Scissors,
   WrapText,
   Clock,
   Copy,
@@ -51,6 +56,11 @@ const ICONS = {
   wrap: WrapText,
   "fold-all": ChevronsDownUp,
   "unfold-all": ChevronsUpDown,
+  "open-tab": ExternalLink,
+  duplicate: CopyPlus,
+  power: Power,
+  cut: Scissors,
+  paste: ClipboardPaste,
 } as const;
 
 export type IconName = keyof typeof ICONS;
