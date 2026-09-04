@@ -110,6 +110,11 @@
     "html": "HTML",
     "xml": "XML"
   },
+  "editor": {
+    "wrap": "Word wrap",
+    "foldAll": "Collapse all",
+    "unfoldAll": "Expand all"
+  },
   "response": {
     "title": "Response",
     "pretty": "Pretty",
@@ -123,7 +128,8 @@
     "hint": "Type a URL and hit <b>Send</b> — or <k>Ctrl</k>+<k>Enter</k>."
   },
   "tab": {
-    "unsaved": "Unsaved changes"
+    "unsaved": "Unsaved changes",
+    "confirmClose": "This tab has unsaved changes. Close it anyway?"
   },
   "menu": {
     "file": "File",
@@ -152,7 +158,6 @@
   },
   "settings": {
     "title": "Settings",
-    "soonBadge": "Coming soon",
     "tabs": {
       "general": "General",
       "appearance": "Appearance",
@@ -178,23 +183,91 @@
       "fontHint": "Any CSS font-family stack works, e.g. \"JetBrains Mono\", monospace.",
       "indent": "Indentation",
       "indentSpace": "Spaces",
-      "indentTab": "Tab"
-    },
-    "general": {
-      "soon": "General preferences — startup, working directory, and defaults — will live here.",
-      "interface": "Interface",
+      "indentTab": "Tab",
+      "layout": "Layout",
       "twoPane": "Two-pane view",
       "twoPaneDesc": "Show the response beside the request instead of below it."
     },
-    "network": { "soon": "Request timeout, SSL verification, max response size, redirects and proxy will live here." },
-    "shortcuts": { "soon": "View and customize keyboard shortcuts here." },
-    "data": { "soon": "Import and export — collections and OpenAPI/Swagger — will live here." },
+    "general": {
+      "tabs": "Tabs",
+      "confirmClose": "Confirm before closing an unsaved tab",
+      "confirmCloseDesc": "Asks before closing a tab that has unsaved changes.",
+      "history": "History",
+      "saveHistory": "Keep request history",
+      "saveHistoryDesc": "Every send is recorded in the sidebar's History tab."
+    },
+    "network": {
+      "requests": "Requests",
+      "timeout": "Timeout (ms)",
+      "maxSize": "Max response (MB)",
+      "timeoutHint": "A timeout of 0 disables the time limit. Responses above the max size are rejected.",
+      "security": "Connection",
+      "verifySsl": "Verify SSL certificates",
+      "verifySslDesc": "Turn off only for local APIs with a self-signed certificate.",
+      "redirects": "Follow redirects",
+      "redirectsDesc": "Follows 3xx responses automatically until the final response.",
+      "cookies": "Cookies",
+      "cookiesDesc": "Stores and resends cookies between requests while the app is open.",
+      "protocol": "HTTP protocol",
+      "protocolHint": "Auto negotiates HTTP/2 when the server supports it.",
+      "auto": "Auto",
+      "http1": "HTTP/1.1",
+      "http2": "HTTP/2",
+      "reset": "Reset to default",
+      "applyHint": "Changes apply from the next request on."
+    },
+    "shortcuts": {
+      "app": "Application",
+      "editor": "Editor",
+      "send": "Send request",
+      "newTab": "New tab",
+      "closeTab": "Close tab",
+      "save": "Save request",
+      "import": "Import",
+      "settings": "Settings",
+      "sidebar": "Show / hide sidebar",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "zoomReset": "Reset zoom",
+      "autocomplete": "Autocomplete",
+      "indent": "Indent",
+      "fold": "Collapse block",
+      "unfold": "Expand block",
+      "foldAll": "Collapse all",
+      "unfoldAll": "Expand all"
+    },
+    "data": {
+      "storage": "Storage",
+      "folder": "Data folder",
+      "folderDesc": "The database (collections, environments, history) and themes live here.",
+      "openFolder": "Open folder",
+      "importTitle": "Import",
+      "import": "Import a collection or OpenAPI",
+      "importDesc": "A collection or OpenAPI/Swagger JSON file becomes a collection in the Library.",
+      "importBtn": "Import…",
+      "cleanup": "Cleanup",
+      "clearHistory": "Clear history",
+      "clearHistoryDesc": "Removes every recorded send. Collections and environments are untouched.",
+      "clearBtn": "Clear",
+      "resetLayout": "Reset layout",
+      "resetLayoutDesc": "Restores the sidebar, response pane and zoom to their default size.",
+      "resetBtn": "Reset"
+    },
     "about": {
-      "version": "Version {{version}}",
-      "desc": "A fast, beautiful, open-source API client built in Rust."
+      "tagline": "lightweight open-source API client",
+      "desc": "Built to open fast, look good and stay simple to extend — no account, no cloud, your data stays on your machine.",
+      "shell": "Shell",
+      "engine": "HTTP engine",
+      "storage": "Storage",
+      "ui": "Interface",
+      "editor": "Editor",
+      "scripts": "Scripts",
+      "openData": "Open data folder",
+      "foot": "Themes, collections and environments are local files and tables — take them with you."
     }
   },
   "errors": {
+    "tooLarge": "The response exceeds the maximum size set in Network.",
     "timeout": "The request timed out.",
     "connect": "Couldn't connect to the server.",
     "request": "Invalid request: {{detail}}",

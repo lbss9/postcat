@@ -110,6 +110,11 @@
     "html": "HTML",
     "xml": "XML"
   },
+  "editor": {
+    "wrap": "Quebra de linha",
+    "foldAll": "Recolher tudo",
+    "unfoldAll": "Expandir tudo"
+  },
   "response": {
     "title": "Resposta",
     "pretty": "Pretty",
@@ -123,7 +128,8 @@
     "hint": "Digite uma URL e clique <b>Enviar</b> — ou <k>Ctrl</k>+<k>Enter</k>."
   },
   "tab": {
-    "unsaved": "Alterações não salvas"
+    "unsaved": "Alterações não salvas",
+    "confirmClose": "Esta aba tem alterações não salvas. Fechar mesmo assim?"
   },
   "menu": {
     "file": "Arquivo",
@@ -152,7 +158,6 @@
   },
   "settings": {
     "title": "Configurações",
-    "soonBadge": "Em breve",
     "tabs": {
       "general": "Geral",
       "appearance": "Aparência",
@@ -178,23 +183,91 @@
       "fontHint": "Qualquer stack CSS de font-family serve, ex.: \"JetBrains Mono\", monospace.",
       "indent": "Indentação",
       "indentSpace": "Espaços",
-      "indentTab": "Tab"
-    },
-    "general": {
-      "soon": "Preferências gerais — inicialização, diretório de trabalho e padrões — ficarão aqui.",
-      "interface": "Interface",
+      "indentTab": "Tab",
+      "layout": "Layout",
       "twoPane": "Duas colunas",
       "twoPaneDesc": "Mostra a resposta ao lado da requisição em vez de embaixo."
     },
-    "network": { "soon": "Timeout, verificação SSL, tamanho máximo de resposta, redirecionamentos e proxy ficarão aqui." },
-    "shortcuts": { "soon": "Veja e personalize os atalhos de teclado aqui." },
-    "data": { "soon": "Importar e exportar — coleções e OpenAPI/Swagger — ficarão aqui." },
+    "general": {
+      "tabs": "Abas",
+      "confirmClose": "Confirmar ao fechar aba não salva",
+      "confirmCloseDesc": "Pergunta antes de fechar uma aba com alterações não salvas.",
+      "history": "Histórico",
+      "saveHistory": "Guardar histórico de requisições",
+      "saveHistoryDesc": "Cada envio fica registrado na aba Histórico da barra lateral."
+    },
+    "network": {
+      "requests": "Requisições",
+      "timeout": "Timeout (ms)",
+      "maxSize": "Resposta máx. (MB)",
+      "timeoutHint": "Timeout 0 desativa o limite de tempo. Respostas acima do tamanho máximo são recusadas.",
+      "security": "Conexão",
+      "verifySsl": "Verificar certificados SSL",
+      "verifySslDesc": "Desative só para APIs locais com certificado autoassinado.",
+      "redirects": "Seguir redirecionamentos",
+      "redirectsDesc": "Segue respostas 3xx automaticamente até a resposta final.",
+      "cookies": "Cookies",
+      "cookiesDesc": "Guarda e reenvia cookies entre requisições enquanto o app estiver aberto.",
+      "protocol": "Protocolo HTTP",
+      "protocolHint": "Automático negocia HTTP/2 quando o servidor suporta.",
+      "auto": "Automático",
+      "http1": "HTTP/1.1",
+      "http2": "HTTP/2",
+      "reset": "Restaurar padrão",
+      "applyHint": "As mudanças valem a partir da próxima requisição."
+    },
+    "shortcuts": {
+      "app": "Aplicativo",
+      "editor": "Editor",
+      "send": "Enviar requisição",
+      "newTab": "Nova aba",
+      "closeTab": "Fechar aba",
+      "save": "Salvar requisição",
+      "import": "Importar",
+      "settings": "Configurações",
+      "sidebar": "Mostrar / ocultar barra lateral",
+      "zoomIn": "Aumentar zoom",
+      "zoomOut": "Diminuir zoom",
+      "zoomReset": "Resetar zoom",
+      "autocomplete": "Autocompletar",
+      "indent": "Indentar",
+      "fold": "Recolher bloco",
+      "unfold": "Expandir bloco",
+      "foldAll": "Recolher tudo",
+      "unfoldAll": "Expandir tudo"
+    },
+    "data": {
+      "storage": "Armazenamento",
+      "folder": "Pasta de dados",
+      "folderDesc": "Banco de dados (coleções, ambientes, histórico) e temas ficam aqui.",
+      "openFolder": "Abrir pasta",
+      "importTitle": "Importar",
+      "import": "Importar coleção ou OpenAPI",
+      "importDesc": "Um arquivo JSON de coleção ou OpenAPI/Swagger vira uma coleção na Biblioteca.",
+      "importBtn": "Importar…",
+      "cleanup": "Limpeza",
+      "clearHistory": "Limpar histórico",
+      "clearHistoryDesc": "Remove todos os envios registrados. Coleções e ambientes não são afetados.",
+      "clearBtn": "Limpar",
+      "resetLayout": "Restaurar layout",
+      "resetLayoutDesc": "Volta barra lateral, painel de resposta e zoom ao tamanho padrão.",
+      "resetBtn": "Restaurar"
+    },
     "about": {
-      "version": "Versão {{version}}",
-      "desc": "Um cliente de API rápido, bonito e open source feito em Rust."
+      "tagline": "cliente de API leve e open source",
+      "desc": "Feito pra ser rápido de abrir, bonito de usar e simples de estender — sem conta, sem nuvem, seus dados ficam na sua máquina.",
+      "shell": "Janela",
+      "engine": "Motor HTTP",
+      "storage": "Armazenamento",
+      "ui": "Interface",
+      "editor": "Editor",
+      "scripts": "Scripts",
+      "openData": "Abrir pasta de dados",
+      "foot": "Temas, coleções e ambientes são arquivos e tabelas locais — leve com você."
     }
   },
   "errors": {
+    "tooLarge": "A resposta excede o tamanho máximo configurado em Rede.",
     "timeout": "A requisição expirou (timeout).",
     "connect": "Não foi possível conectar ao servidor.",
     "request": "Requisição inválida: {{detail}}",
