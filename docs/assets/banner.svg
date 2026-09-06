@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="PostCat, a fast, local-first API client">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1713"/>
+      <stop offset="1" stop-color="#141210"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f0713f" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#f0713f" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#f0713f" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.22" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f0713f" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#f0713f" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="round"><rect width="1200" height="300" rx="18"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#round)">
+    <rect width="1200" height="300" fill="url(#bg)"/>
+    <rect width="1200" height="300" fill="url(#halo)"/>
+
+    <!-- faint grid -->
+    <g stroke="#f1eae1" stroke-opacity="0.035" stroke-width="1">
+      <path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200"/>
+      <path d="M150 0V300M300 0V300M450 0V300M600 0V300M750 0V300M900 0V300M1050 0V300"/>
+    </g>
+
+    <!-- mark: a terminal prompt with cat ears -->
+    <g transform="translate(96 150)">
+      <rect x="-56" y="-56" width="112" height="112" rx="26" fill="#f0713f"/>
+      <path d="M-40 -56 L-28 -84 L-10 -58 Z" fill="#f0713f"/>
+      <path d="M40 -56 L28 -84 L10 -58 Z" fill="#f0713f"/>
+      <path d="M-24 -18 L-4 2 L-24 22" fill="none" stroke="#1a0e07" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="6" y="14" width="30" height="9" rx="4.5" fill="#1a0e07"/>
+    </g>
+
+    <!-- wordmark -->
+    <text x="188" y="138" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#f1eae1" letter-spacing="-2">Post<tspan fill="#f0713f">Cat</tspan></text>
+    <text x="192" y="178" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="23" fill="#b4a99c">A fast, local-first API client.</text>
+    <text x="192" y="204" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" fill="#7d7367">Rust engine · native shell · no account · your data stays on disk</text>
+
+    <!-- method chips -->
+    <g font-family="Cascadia Code, JetBrains Mono, Fira Code, Consolas, ui-monospace, monospace" font-size="15" font-weight="700" letter-spacing="1">
+      <g transform="translate(192 226)">
+        <rect width="74" height="30" rx="7" fill="#4cc088" fill-opacity="0.14" stroke="#4cc088" stroke-opacity="0.5"/>
+        <text x="37" y="20" text-anchor="middle" fill="#4cc088">GET</text>
+      </g>
+      <g transform="translate(276 226)">
+        <rect width="82" height="30" rx="7" fill="#e2ac36" fill-opacity="0.14" stroke="#e2ac36" stroke-opacity="0.5"/>
+        <text x="41" y="20" text-anchor="middle" fill="#e2ac36">POST</text>
+      </g>
+      <g transform="translate(368 226)">
+        <rect width="74" height="30" rx="7" fill="#5b93ee" fill-opacity="0.14" stroke="#5b93ee" stroke-opacity="0.5"/>
+        <text x="37" y="20" text-anchor="middle" fill="#5b93ee">PUT</text>
+      </g>
+      <g transform="translate(452 226)">
+        <rect width="88" height="30" rx="7" fill="#a97ef0" fill-opacity="0.14" stroke="#a97ef0" stroke-opacity="0.5"/>
+        <text x="44" y="20" text-anchor="middle" fill="#a97ef0">PATCH</text>
+      </g>
+      <g transform="translate(550 226)">
+        <rect width="96" height="30" rx="7" fill="#ec6060" fill-opacity="0.14" stroke="#ec6060" stroke-opacity="0.5"/>
+        <text x="48" y="20" text-anchor="middle" fill="#ec6060">DELETE</text>
+      </g>
+    </g>
+
+    <!-- right side: a tiny response -->
+    <g transform="translate(830 62)" font-family="Cascadia Code, JetBrains Mono, Fira Code, Consolas, ui-monospace, monospace" font-size="15">
+      <rect x="0" y="0" width="320" height="176" rx="12" fill="#221d17" stroke="#f1eae1" stroke-opacity="0.08"/>
+      <circle cx="18" cy="18" r="5" fill="#ec6060" fill-opacity="0.8"/>
+      <circle cx="36" cy="18" r="5" fill="#e2ac36" fill-opacity="0.8"/>
+      <circle cx="54" cy="18" r="5" fill="#4cc088" fill-opacity="0.8"/>
+      <text x="18" y="52" fill="#7d7367">GET <tspan fill="#b4a99c">{{base_url}}</tspan><tspan fill="#b4a99c">/users/1</tspan></text>
+      <text x="18" y="80" fill="#4cc088">200 OK</text>
+      <text x="96" y="80" fill="#7d7367">· 112 ms · 1.2 KB</text>
+      <text x="18" y="112" fill="#b4a99c">{</text>
+      <text x="36" y="134" fill="#77a9f5">"id"<tspan fill="#b4a99c">: </tspan><tspan fill="#77a9f5">1</tspan><tspan fill="#b4a99c">,</tspan></text>
+      <text x="36" y="156" fill="#6fce9c">"name"<tspan fill="#b4a99c">: </tspan><tspan fill="#6fce9c">"Leanne Graham"</tspan></text>
+    </g>
+
+    <!-- accent line -->
+    <rect x="0" y="296" width="1200" height="4" fill="url(#glow)"/>
+  </g>
+</svg>
