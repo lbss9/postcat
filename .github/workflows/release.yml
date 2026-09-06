@@ -54,8 +54,8 @@ jobs:
           releaseBody: |
             ### Download
 
-            - **PostCat_\_\_VERSION\_\__x64-setup.exe** — installer (recommended)
-            - **PostCat_\_\_VERSION\_\__x64_en-US.msi** — MSI package
+            - `PostCat___VERSION___x64-setup.exe` — installer (recommended)
+            - `PostCat___VERSION___x64_en-US.msi` — MSI package
 
             Installed copies update themselves: PostCat checks this release on
             startup and offers to install it. You can also check from
