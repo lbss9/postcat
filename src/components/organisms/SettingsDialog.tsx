@@ -1,5 +1,8 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import { getVersion } from "@tauri-apps/api/app";
+import appIcon from "@/assets/icon.png";
+import { checkForUpdates, installUpdate, useUpdater } from "@/services/updater";
 import Button from "@/components/atoms/Button";
 import Icon from "@/components/atoms/Icon";
 import ToggleRow from "@/components/molecules/ToggleRow";
@@ -545,15 +548,59 @@ const ABOUT_FACTS: [string, string][] = [
 
 function About({ onOpenDataFolder, onOpenThemesFolder }: SettingsDialogProps) {
   const { t } = useTranslation();
+  const [version, setVersion] = useState(APP_VERSION);
+  const upd = useUpdater();
+  useEffect(() => {
+    getVersion().then(setVersion).catch(() => {});
+  }, []);
+
+  const busy =
+    upd.status === "checking" || upd.status === "downloading" || upd.status === "installing";
+  let updateLine: ReactNode = null;
+  if (upd.status === "checking") updateLine = <span>{t("update.checking")}</span>;
+  else if (upd.status === "upToDate") updateLine = <span className="ok">{t("update.upToDate")}</span>;
+  else if (upd.status === "error") updateLine = <span className="err">{t("update.error")}</span>;
+  else if (upd.status === "available")
+    updateLine = (
+      <>
+        <span className="new">{t("update.found", { version: upd.version })}</span>
+        <Button variant="primary" size="sm" onClick={() => void installUpdate()}>
+          {t("update.install")}
+        </Button>
+      </>
+    );
+  else if (upd.status === "downloading")
+    updateLine = (
+      <span>
+        {upd.progress != null
+          ? t("update.downloadingPct", { pct: Math.round(upd.progress * 100) })
+          : t("update.downloading")}
+      </span>
+    );
+  else if (upd.status === "installing") updateLine = <span>{t("update.installing")}</span>;
+
   return (
     <div className="about">
       <div className="about-hero">
-        <div className="about-glyph">P</div>
+        <div className="about-glyph">
+          <img src={appIcon} alt="" draggable={false} />
+        </div>
         <div className="about-title">
           <h3>PostCat</h3>
           <span className="about-tagline">{t("settings.about.tagline")}</span>
         </div>
-        <span className="about-ver">v{APP_VERSION}</span>
+        <span className="about-ver">v{version}</span>
+      </div>
+      <div className="about-update">
+        <Button
+          variant="bare"
+          className="opt-chip"
+          disabled={busy}
+          onClick={() => void checkForUpdates()}
+        >
+          {t("update.check")}
+        </Button>
+        {updateLine}
       </div>
       <p className="about-desc">{t("settings.about.desc")}</p>
       <div className="about-facts">

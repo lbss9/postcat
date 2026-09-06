@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    project_postcat_lib::run()
+    postcat_lib::run()
 }

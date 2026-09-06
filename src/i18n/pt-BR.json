@@ -303,5 +303,19 @@
     "url": "URL inválida: {{detail}}",
     "method": "Método HTTP inválido: {{detail}}",
     "unknown": "{{detail}}"
+  },
+  "update": {
+    "title": "PostCat {{version}} disponível",
+    "available": "Instale agora e o app reinicia em alguns segundos.",
+    "downloading": "Baixando…",
+    "downloadingPct": "Baixando… {{pct}}%",
+    "installing": "Instalando e reiniciando…",
+    "install": "Instalar",
+    "later": "Depois",
+    "check": "Verificar atualizações",
+    "checking": "Verificando…",
+    "upToDate": "Você está na versão mais recente.",
+    "found": "{{version}} disponível",
+    "error": "Não foi possível verificar atualizações."
   }
 }

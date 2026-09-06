@@ -6,6 +6,8 @@
  * lives in hooks (`useWorkspaceTabs`, `useLayout`, `useTheme`).
  */
 import { useEffect, useMemo, useState } from "react";
+import UpdateToast from "@/components/molecules/UpdateToast";
+import { checkForUpdates } from "@/services/updater";
 import { useTranslation } from "react-i18next";
 import { open as openFileDialog, save as saveFileDialog } from "@tauri-apps/plugin-dialog";
 
@@ -113,6 +115,12 @@ export default function App() {
 
   useEffect(() => {
     historyList().then(setHistory).catch(() => {});
+  }, []);
+
+  // look for a newer release shortly after startup; stays silent unless one exists
+  useEffect(() => {
+    const id = window.setTimeout(() => void checkForUpdates({ silent: true }), 4000);
+    return () => window.clearTimeout(id);
   }, []);
 
   const reloadNodes = () => nodesList().then(setNodes).catch(() => {});
@@ -629,6 +637,7 @@ export default function App() {
       onMainContextMenu={mainContextMenu}
       overlays={
         <>
+          <UpdateToast />
           <SettingsDialog
             open={settingsOpen}
             tab={settingsTab}

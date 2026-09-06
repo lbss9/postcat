@@ -3260,3 +3260,116 @@ kbd {
     transition: none !important;
   }
 }
+
+/* update toast (bottom-right card when a new release is available) */
+.update-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1000;
+  width: 340px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  animation: update-toast-in 0.22s ease-out;
+}
+@keyframes update-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.update-toast-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.update-toast-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.update-toast-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+.update-toast-text {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+.update-toast-bar {
+  margin-top: 6px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+.update-toast-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 0.15s linear;
+}
+.update-toast-fill.indeterminate {
+  width: 40%;
+  animation: update-toast-slide 1.1s ease-in-out infinite;
+}
+@keyframes update-toast-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+.update-toast-actions {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+/* about: real app icon + update status */
+.about-glyph img {
+  width: 56px;
+  height: 56px;
+  display: block;
+  border-radius: 14px;
+}
+.about-update {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--text-soft);
+}
+.about-update .ok {
+  color: var(--get);
+}
+.about-update .err {
+  color: var(--delete);
+}
+.about-update .new {
+  color: var(--accent);
+  font-weight: 600;
+}

@@ -1,0 +1,65 @@
+name: release
+
+# Builds the Windows installers, signs the updater artifacts and publishes a
+# GitHub release with `latest.json` — the file the in-app updater polls.
+#
+# Trigger: push a tag like `v0.2.0` (see `npm run release`), or run manually.
+# Secrets: TAURI_SIGNING_PRIVATE_KEY (minisign key, no password).
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  windows:
+    name: Windows x64
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - run: npm ci
+
+      - name: Type-check frontend
+        run: npx tsc --noEmit
+
+      - name: Build, sign and publish
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+        with:
+          tagName: v__VERSION__
+          releaseName: "PostCat v__VERSION__"
+          releaseBody: |
+            ### Download
+
+            - **PostCat_\_\_VERSION\_\__x64-setup.exe** — installer (recommended)
+            - **PostCat_\_\_VERSION\_\__x64_en-US.msi** — MSI package
+
+            Installed copies update themselves: PostCat checks this release on
+            startup and offers to install it. You can also check from
+            *Settings → About*.
+          releaseDraft: false
+          prerelease: false
+          includeUpdaterJson: true

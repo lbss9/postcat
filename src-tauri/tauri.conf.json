@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "project-postcat",
+  "productName": "PostCat",
   "version": "0.1.0",
-  "identifier": "com.lluan.project-postcat",
+  "identifier": "com.lluan.postcat",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -34,6 +34,27 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "createUpdaterArtifacts": true,
+    "publisher": "Luan Barbosa",
+    "shortDescription": "A fast, local-first API client",
+    "longDescription": "PostCat is a lightweight desktop API client. Rust HTTP engine, Tauri shell, everything stored locally.",
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "English",
+          "PortugueseBR"
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1NzJGMDVEMjhERDU1QjgKUldTNFZkMG9YZkJ5eFhJZ2VqTXNXcmpwUE9rMlEzdXo4STJBRW9OR0hhZTJxelFOZ3NsTktzZEQK",
+      "endpoints": [
+        "https://github.com/lbss9/postcat/releases/latest/download/latest.json"
+      ]
+    }
   }
 }
